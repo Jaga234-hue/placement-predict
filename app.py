@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 import pickle
 import numpy as np
+import pandas as pd
 import os
 
 # Paths for model and scaler
@@ -16,7 +17,14 @@ with open(MODEL_PATH, 'rb') as file:
 with open(SCALER_PATH, 'rb') as file:
     scaler = pickle.load(file)
 
+
+df = pd.read_csv("student_data_logistic.csv")
 app = Flask(__name__)
+@app.route('/dataset')
+def show_dataset():
+    #convert DataFrame to HTML table
+    dataset_html = df.to_html(classes = 'table table-striped', index=False);
+    return dataset_html;
 
 @app.route('/')
 def home():
