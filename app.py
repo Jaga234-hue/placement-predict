@@ -3,6 +3,11 @@ import pickle
 import numpy as np
 import pandas as pd
 import os
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
 
 # Paths for model and scaler
 BASE_DIR = os.path.dirname(__file__)
